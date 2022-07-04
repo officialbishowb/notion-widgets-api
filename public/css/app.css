@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+html,
+body {
+    background-color: #1F2937;
+}
+
+:root {
+    font-family: 'Lato', sans-serif;
+    --color-primary: #42BFDD;
+    --bg-color: #1F2937;
+    --color-secondary: #F06543;
+    --hover-color: #BBE6E4;
+}
+
+
+/* General Boostrap modified */
+
+.form-control:focus {
+    box-shadow: 0px 0px 1px 1px var(--color-primary);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:focus {
+    box-shadow: 0px 0px 1px 2px var(--color-primary);
+}
+
+a {
+    color: var(--color-primary);
+}
+
+
+/** Landing page */
+
+.dark {
+    background-color: var(--bg-color);
+}
+
+nav {
+    box-shadow: 0px 0px 2px 0px #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--color-primary);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--hover-color);
+}
+
+.nav-link {
+    font-size: 1.2em;
+}
+
+.special {
+    border: 2px solid var(--color-primary);
+}
+
+.special:nth-child(even) {
+    background-color: var(--color-primary);
+}
+
+.special:nth-child(even).nav-link {
+    color: var(--bg-color);
+}
+
+@media screen and (max-width:992px) {
+    .special.nav-link {
+        border: none;
+    }
+    .special:nth-child(even).nav-link {
+        background-color: transparent;
+        color: var(--color-primary);
+    }
+}
