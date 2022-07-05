@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Mail\VerifyMail;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +86,24 @@ Route::get('/reset_password', function () {
 });
 
 
+
+Route::get('/widget/{id}', function ($widget_id) {
+    if(session()->has('username_')){
+        return view('/dashboard/widget',[
+            'widget_id' => $widget_id
+        ]);
+    }
+    return redirect('/login');
+});
+
+
+
+Route::get('/embed/widgets/{widget_name}/{data}', function ($widget_name,$widget_data) {
+    if(session()->has('username_')){
+        return view('/dashboard/embed/widgets/'.$widget_name,[
+            'widget_data' => $widget_data
+        ]);
+    }
+    return redirect('/login');
+});
   

@@ -17,7 +17,6 @@ class CreateWidgetsTable extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('image_path', 255);
-            $table->string('group', 255);
             $table->string('type', 255)->default('free_widget');
         });
     }

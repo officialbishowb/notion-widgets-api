@@ -29,48 +29,42 @@
   </div>
 </nav>
 
-
-<!-- Main content -->
-
 @php
-  
-  $widgets = DB::table('widgets')->get();
-  $is_premium  = DB::table('api_tokens')
-  ->select('token_type')
-  ->where('username', session()->get('username_'))
-  ->first();
+    $widget_name = DB::table('widgets')
+    ->select('name')
+    ->where('id', $widget_id)
+    ->first();
 
-  $is_premium = $is_premium->token_type == "free_token" ? false : true;
-
+    $widget_page_name = strtolower(str_replace(' ', '_', $widget_name->name));
 @endphp
-<div class="container mt-5">
-  <div class="row">
-    @foreach($widgets as $widget)
-    <div class="card col m-3" width="23rem;">
-      <img src="{{$widget->image_path}}" class="card-img-top" alt="{{$widget->name}}">
-      <hr>
-      <div class="card-body text-center">
-        <h5 class="card-title">{{$widget->name}}</h5>
-        @if(session()->has('username_'))
-            @if($is_premium)
-              <button class="btn btn-primary mt-2" onclick="window.location.href='/widget/{{ $widget->id }}'">Embed it</button>
-            @elseif(!$is_premium && $widget->type == "premium_widget")
-              <button class="btn btn-primary mt-2" onclick="window.location.href='/upgrade'">Upgrade to Premium</button>
-            @elseif(!$is_premium && $widget->type == "free_widget")
-              <button class="btn btn-primary mt-2" onclick="window.location.href='/widget/{{ $widget->id }}'">Embed it</button>
-            @endif
-        @else
-          <button class="btn btn-primary mt-2" onclick="window.location.href='/widget/{{ $widget->id }}'">Embed it</button>
-        @endif
-      </div>
-    </div>
-    @endforeach
-  </div>
-</div>
+
+        <!-- Main content !-->
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="view col-5">
+                    <iframe src="" width="100%" height="500" frameborder="0" scrolling="no" id="live_view"></iframe>
+                </div>
+                <div class="col-2"><!--extra div--></div>
+                <div class="settings col text-white">
+                    <h2><u>Settings</u></h2> 
+                    <input type="hidden" id="_token" value="{{csrf_token()}}">
+                    <input type="hidden" id="widget_page_name" value="{{$widget_page_name}}">
+                    <div class="available-setting mt-5" oninput="update()">
+
+                        <!-- Color picker -->
+                       <label for="page_bg_color"> Page background color: 
+                        <input type="color" class="form-control form-control-color" id="page_bg_color" value="#563d7c" title="Choose your color">
+                       </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/widget_settings.js') }}" type="text/javascript"> </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>

@@ -11,14 +11,14 @@
 <body><!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark dark">
       <div class="container">
-          <a href="#" class="navbar-brand"><img src="{{asset('img/widget_api_logo.svg')}}" width="60px"></a>
+          <a href="/" class="navbar-brand"><img src="{{asset('img/widget_api_logo.svg')}}" width="60px"></a>
           <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
   
               <div class="navbar-nav ms-auto">
-                <a href="#" class="nav-item nav-link mx-3">Home</a>
+                <a href="/" class="nav-item nav-link mx-3">Home</a>
                 <a href="/pricing" class="nav-item nav-link mx-3">Pricing</a>
                 <a href="/login" class="nav-item nav-link mx-3 special">Login</a>
                 

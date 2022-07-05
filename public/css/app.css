@@ -76,3 +76,15 @@ nav {
         color: var(--color-primary);
     }
 }
+
+
+/*Main content area Landing page*/
+
+.card .btn-primary:hover {
+    color: var(--hover-color);
+    background-color: var(--color-primary);
+    border: none;
+}
+
+
+/* Widget main area */

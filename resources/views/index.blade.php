@@ -30,6 +30,46 @@
 </nav>
 
 
+<!-- Main content -->
+
+@php
+  
+  $widgets = DB::table('widgets')->get();
+
+@endphp
+<div class="container mt-5">
+  <div class="row">
+    @foreach($widgets as $widget)
+    <div class="card col m-3" width="23rem;">
+      <img src="{{$widget->image_path}}" class="card-img-top" alt="{{$widget->name}}">
+      <hr>
+      <div class="card-body text-center">
+        <h5 class="card-title">{{$widget->name}}</h5>
+        @if(session()->has('username_'))
+          @php
+            $is_premium  = DB::table('api_tokens')
+                          ->select('token_type')
+                          ->where('username', session()->get('username_'))
+                          ->first();
+            $is_premium = $is_premium->token_type == "free_token" ? false : true;
+          @endphp
+            @if($is_premium)
+              <button class="btn btn-primary mt-2" onclick="window.location.href='/widget/{{ $widget->id }}'">Embed it</button>
+            @elseif(!$is_premium && $widget->type == "premium_widget")
+              <button class="btn btn-primary mt-2" onclick="window.location.href='/upgrade'">Upgrade to Premium</button>
+            @else
+              <button class="btn btn-primary mt-2" onclick="window.location.href='/pricing'">Embed it</button>
+            @endif
+        @else
+          <button class="btn btn-primary mt-2" onclick="window.location.href='/widget/{{ $widget->id }}'">Embed it</button>
+        @endif
+      </div>
+    </div>
+    @endforeach
+  </div>
+</div>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
